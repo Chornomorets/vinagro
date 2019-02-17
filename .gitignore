@@ -197,3 +197,4 @@ project.lock.json
 node_modules
 **/wwwroot/**/*
 /src/AspNetCoreDemoApp/Properties/launchSettings.json
+/src/AspNetCoreDemoApp/.env

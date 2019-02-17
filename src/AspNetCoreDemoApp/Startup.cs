@@ -21,8 +21,12 @@ namespace AspNetCoreDemoApp
             {
                 Pooling = true,
                 TrustServerCertificate = true,
-                SslMode = SslMode.Require
+                SslMode = SslMode.Prefer
             };
+
+            var databaseUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+
+            Console.WriteLine(databaseUrl);
 
             services.AddEntityFrameworkNpgsql()
                     .AddDbContext<Context>(options => options.UseNpgsql(builder.ToString()));
