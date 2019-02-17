@@ -19,7 +19,7 @@ namespace AspNetCoreDemoApp.Controllers
 
             using (var context = new Context())
             {
-                var institute = context.Institutes.Add(new Institute() { Name = "" + Environment.GetEnvironmentVariable("DATABASE_URL") });
+                var institute = context.Institutes.Add(new Institute() { Name = "envvar" + Environment.GetEnvironmentVariable("DATABASE_URL") });
                 context.SaveChanges();
                 institute = context.Institutes.Add(new Institute() { Name = "" + Environment.CurrentDirectory.ToString() });
                 context.SaveChanges();
