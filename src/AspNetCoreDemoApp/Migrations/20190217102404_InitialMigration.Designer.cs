@@ -9,8 +9,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AspNetCoreDemoApp.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20190217012455_1")]
-    partial class _1
+    [Migration("20190217102404_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
