@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using AspNetCoreDemoApp.Common;
 using AspNetCoreDemoApp.Model;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,8 @@ namespace AspNetCoreDemoApp.Controllers
 		[HttpGet]
 		public IEnumerable<string> Get()
 		{
+            string var = EnvironmentConfigManager.GetConnectionString();
+            Console.WriteLine(var);
             return new[] { "ONPU", "ISUS" };
 		}
 

@@ -13,7 +13,7 @@ namespace AspNetCoreDemoApp.Common
         {
             //if run at the heroku
             var databaseURL = Environment.GetEnvironmentVariable("DATABASE_URL");
-
+            
             //if run at the local
             if (databaseURL == null)    
             {
