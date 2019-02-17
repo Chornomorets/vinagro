@@ -24,7 +24,7 @@ namespace AspNetCoreDemoApp
                 SslMode = SslMode.Prefer
             };
 
-            var databaseUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
+           
 
             Console.WriteLine(databaseUrl);
 
