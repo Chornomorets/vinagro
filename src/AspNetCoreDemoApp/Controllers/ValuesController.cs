@@ -14,12 +14,6 @@ namespace AspNetCoreDemoApp.Controllers
 		[HttpGet]
 		public IEnumerable<string> Get()
 		{
-            using (var context = new Context())
-            {
-                var institute = context.Institutes.Add(new Institute() { Name = "allIsOk" });
-                context.SaveChanges();
-            }
-
             return new[] { "ONPU", "ISUS" };
 		}
 
