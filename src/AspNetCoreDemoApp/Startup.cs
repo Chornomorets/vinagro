@@ -25,9 +25,6 @@ namespace AspNetCoreDemoApp
             };
 
            
-
-            Console.WriteLine(databaseUrl);
-
             services.AddEntityFrameworkNpgsql()
                     .AddDbContext<Context>(options => options.UseNpgsql(builder.ToString()));
 

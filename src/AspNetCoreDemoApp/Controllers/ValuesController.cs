@@ -21,6 +21,9 @@ namespace AspNetCoreDemoApp.Controllers
             {
                 var institute = context.Institutes.Add(new Institute() { Name = "" + Environment.GetEnvironmentVariable("DATABASE_URL") });
                 context.SaveChanges();
+                institute = context.Institutes.Add(new Institute() { Name = "" + Environment.CurrentDirectory.ToString() });
+                context.SaveChanges();
+
             }
 
             return new[] { "ONPU", "ISUS" };
@@ -30,14 +33,17 @@ namespace AspNetCoreDemoApp.Controllers
 		[HttpGet("{id}")]
 		public string Get(int id)
 		{
-
+            List<Institute> l = new List<Institute>();
             using (var context = new Context())
             {
                 var institutes = context.Institutes;
                 foreach(var i in institutes)
                 {
+
+                    l.Add(i);
                     Console.WriteLine(i.Name);
                 }
+
             }
             Console.WriteLine();
 			return "value";
