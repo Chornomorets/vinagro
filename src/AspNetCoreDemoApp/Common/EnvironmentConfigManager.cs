@@ -11,9 +11,11 @@ namespace AspNetCoreDemoApp.Common
 
         public static string GetConnectionString()
         {
+            //if run at the heroku
             var databaseURL = Environment.GetEnvironmentVariable("DATABASE_URL");
 
-            if (databaseURL == null)
+            //if run at the local
+            if (databaseURL == null)    
             {
                 databaseURL = Environment.GetEnvironmentVariable("DATABASE_URL", EnvironmentVariableTarget.Machine);
             }
