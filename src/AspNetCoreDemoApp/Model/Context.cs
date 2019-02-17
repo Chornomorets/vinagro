@@ -16,9 +16,9 @@ namespace AspNetCoreDemoApp.Model
 
         public Context() { }
             
-        public DbSet<Institute> Institutes { get; set; }
+        public DbSet<Institute> Institute { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
-            optionsBuilder.UseNpgsql(EnvironmentConfigManager.GetDatabaseURL());
+            optionsBuilder.UseNpgsql(EnvironmentConfigManager.GetConnectionString());
     }
 }

@@ -20,7 +20,7 @@ namespace AspNetCoreDemoApp
                 .AddJsonFormatters();
            
             services.AddEntityFrameworkNpgsql()
-                    .AddDbContext<Context>(options => options.UseNpgsql(EnvironmentConfigManager.GetDatabaseURL()));
+                    .AddDbContext<Context>(options => options.UseNpgsql(EnvironmentConfigManager.GetConnectionString()));
 
         }
 
