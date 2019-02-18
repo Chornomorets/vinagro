@@ -17,6 +17,12 @@ namespace AspNetCoreDemoApp.Model
         public Context() { }
             
         public DbSet<Institute> Institute { get; set; }
+        public DbSet<Mentor> Mentor { get; set; }
+        public DbSet<MentorRequest> MentorRequest { get; set; }
+        public DbSet<Partner> Partner { get; set; }
+        public DbSet<Project> Project { get; set; }
+        public DbSet<Student> Student { get; set; }
+        public DbSet<Student2Project> Student2Project { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
             optionsBuilder.UseNpgsql(EnvironmentConfigManager.GetConnectionString());

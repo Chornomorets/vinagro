@@ -7,12 +7,17 @@ using System.Threading.Tasks;
 
 namespace AspNetCoreDemoApp.Model
 {
-    public class Institute
+    public class Student2Project
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long ID { get; set; }
 
-        [MaxLength(50)]
-        public string Name { get; set; }
+        [Required, ForeignKey("Student")]
+        public long FK_Student { get; set; }
+        public Student Student { get; set; }
+
+        [Required, ForeignKey("Project")]
+        public long FK_Project { get; set; }
+        public Project Project { get; set; }
     }
 }
