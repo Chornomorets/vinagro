@@ -40,5 +40,8 @@ namespace AspNetCoreDemoApp.Model
 
         [Required, MaxLength(350)]
         public string Password { get; set; }
+
+        [Required, MaxLength(350)]
+        public string Token { get; set; }
     }
 }

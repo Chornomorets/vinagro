@@ -32,5 +32,8 @@ namespace AspNetCoreDemoApp.Model
 
         [MaxLength(20)]
         public string Phone { get; set; }
+
+        [Required, MaxLength(350)]
+        public string Token { get; set; }
     }
 }
