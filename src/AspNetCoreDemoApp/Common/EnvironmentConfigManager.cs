@@ -8,19 +8,16 @@ namespace AspNetCoreDemoApp.Common
 {
     public static class EnvironmentConfigManager
     {
+        #region constants
+
+        private static readonly string DATABASE_URL = "DATABASE_URL";
+        private static readonly string AUTHORIZATION = "AUTHORIZATION";
+
+        #endregion
 
         public static string GetConnectionString()
         {
-            //if run at the heroku
-            var databaseURL = Environment.GetEnvironmentVariable("DATABASE_URL");
-            
-            //if run at the local
-            if (databaseURL == null)    
-            {
-                databaseURL = Environment.GetEnvironmentVariable("DATABASE_URL", EnvironmentVariableTarget.Machine);
-            }
-            
-            var builder = new PostgreSqlConnectionStringBuilder(databaseURL)
+            var builder = new PostgreSqlConnectionStringBuilder(GetEnvironmentVariable(DATABASE_URL))
             {
                 Pooling = true,
                 TrustServerCertificate = true,
@@ -32,13 +29,18 @@ namespace AspNetCoreDemoApp.Common
 
         public static string GetAuthenticationString()
         {
+            return GetEnvironmentVariable(AUTHORIZATION);
+        }
+
+        private static string GetEnvironmentVariable(string key)
+        {
             //if run at the heroku
-            var authentication = Environment.GetEnvironmentVariable("AUTHORIZATION");
+            var authentication = Environment.GetEnvironmentVariable(key);
 
             //if run at the local
             if (authentication == null)
             {
-                authentication = Environment.GetEnvironmentVariable("AUTHORIZATION", EnvironmentVariableTarget.Machine);
+                authentication = Environment.GetEnvironmentVariable(key, EnvironmentVariableTarget.Machine);
             }
 
             return authentication;
