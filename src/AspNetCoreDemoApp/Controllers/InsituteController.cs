@@ -16,7 +16,7 @@ namespace AspNetCoreDemoApp.Controllers
 
         // POST: api/Institute/Add
         [HttpPost]
-        [Route("Register")]
+        [Route("Add")]
         public ActionResult<Institute> AddInstitute([FromBody]Institute institute)
         {
             var institutes = _context.Institute;
