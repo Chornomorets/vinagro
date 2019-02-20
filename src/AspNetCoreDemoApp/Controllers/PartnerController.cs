@@ -21,7 +21,13 @@ namespace AspNetCoreDemoApp.Controllers
         [Route("Register")]
         public ActionResult<Partner> RegisterPartner([FromBody]Partner partner)
         {
+            if (!AuthenticationManager.IsAuthenticated(Request))
+            {
+                return BadRequest(AuthenticationManager.UnauthorizedError());
+            }
+
             var partners = _context.Partner;
+
             if (PartnerValidator.IsUsernameExists(partner))
             {
                 return BadRequest(ErrorHandler.GenerateError(999, "Username already exists."));
@@ -34,9 +40,13 @@ namespace AspNetCoreDemoApp.Controllers
         // POST: api/Partner/Retrieve
         [HttpPost]
         [Route("Retrieve")]
-        public ActionResult<Student> RetrievePartner([FromBody] AuthenticationModel model)
+        public ActionResult<Partner> RetrievePartner([FromBody] AuthenticationModel model)
         {
-            var partner = _context.Student.Where(p => p.Username == model.Username && p.Password == model.Password)
+            if (!AuthenticationManager.IsAuthenticated(Request))
+            {
+                return BadRequest(AuthenticationManager.UnauthorizedError());
+            }
+            var partner = _context.Partner.Where(p => p.Username == model.Username && p.Password == model.Password)
                                           .FirstOrDefault();
             return partner;
         }

@@ -21,6 +21,11 @@ namespace AspNetCoreDemoApp.Controllers
         [Route("Register")]
         public ActionResult<Student> RegisterStudent([FromBody]Student student)
         {
+            if (!AuthenticationManager.IsAuthenticated(Request))
+            {
+                return BadRequest(AuthenticationManager.UnauthorizedError());
+            }
+
             var students = _context.Student;
             if (StudentValidator.IsUsernameExists(student))
             {
@@ -36,6 +41,11 @@ namespace AspNetCoreDemoApp.Controllers
         [Route("Retrieve")]
         public ActionResult<Student> RetrieveStudent([FromBody] AuthenticationModel model)
         {
+            if (!AuthenticationManager.IsAuthenticated(Request))
+            {
+                return BadRequest(AuthenticationManager.UnauthorizedError());
+            }
+
             var student = _context.Student.Where(s => s.Username == model.Username && s.Password == model.Password)
                                           .FirstOrDefault();
             return student;

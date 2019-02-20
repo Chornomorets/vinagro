@@ -30,5 +30,18 @@ namespace AspNetCoreDemoApp.Common
             return builder.ToString();
         }
 
+        public static string GetAuthenticationString()
+        {
+            //if run at the heroku
+            var authentication = Environment.GetEnvironmentVariable("AUTHORIZATION");
+
+            //if run at the local
+            if (authentication == null)
+            {
+                authentication = Environment.GetEnvironmentVariable("AUTHORIZATION", EnvironmentVariableTarget.Machine);
+            }
+
+            return authentication;
+        }
     }
 }
