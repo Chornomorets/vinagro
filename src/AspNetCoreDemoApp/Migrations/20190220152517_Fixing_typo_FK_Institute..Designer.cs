@@ -3,15 +3,17 @@ using System;
 using AspNetCoreDemoApp.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace AspNetCoreDemoApp.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20190220152517_Fixing_typo_FK_Institute.")]
+    partial class Fixing_typo_FK_Institute
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,7 +45,7 @@ namespace AspNetCoreDemoApp.Migrations
                         .IsRequired()
                         .HasMaxLength(50);
 
-                    b.Property<long>("FK_Institute");
+                    b.Property<long>("FK_Intitute");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -77,7 +79,7 @@ namespace AspNetCoreDemoApp.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("FK_Institute");
+                    b.HasIndex("FK_Intitute");
 
                     b.ToTable("Mentor");
                 });
@@ -244,7 +246,7 @@ namespace AspNetCoreDemoApp.Migrations
                 {
                     b.HasOne("AspNetCoreDemoApp.Model.Institute", "Institute")
                         .WithMany()
-                        .HasForeignKey("FK_Institute")
+                        .HasForeignKey("FK_Intitute")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

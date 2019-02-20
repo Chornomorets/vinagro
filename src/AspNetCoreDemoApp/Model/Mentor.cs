@@ -27,7 +27,7 @@ namespace AspNetCoreDemoApp.Model
         public string Photo { get; set; }
 
         [Required, ForeignKey("Institute")]
-        public long FK_Intitute { get; set; }
+        public long FK_Institute { get; set; }
         public Institute Institute { get; set; }
 
         [Required, MaxLength(50)]

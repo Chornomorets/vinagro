@@ -29,7 +29,7 @@ namespace AspNetCoreDemoApp.Model
         public int Semester { get; set; }
 
         [Required, ForeignKey("Institute")]
-        public long FK_Intitute { get; set; }
+        public long FK_Institute { get; set; }
         public Institute Institute { get; set; }
 
         [MaxLength(20)]

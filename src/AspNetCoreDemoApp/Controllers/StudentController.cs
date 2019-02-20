@@ -11,34 +11,34 @@ using AspNetCoreDemoApp.Validators;
 
 namespace AspNetCoreDemoApp.Controllers
 {
-	[Route("api/Partner")]
-	public class PartnerController : ControllerBase
+	[Route("api/Student")]
+	public class StudentController : ControllerBase
 	{
         private readonly Context _context = new Context();
 
-        // POST: api/Partner/Register
+        // POST: api/Student/Register
         [HttpPost]
         [Route("Register")]
-        public ActionResult<Partner> RegisterPartner([FromBody]Partner partner)
+        public ActionResult<Student> RegisterStudent([FromBody]Student student)
         {
-            var partners = _context.Partner;
-            if (PartnerValidator.IsUsernameExists(partner))
+            var students = _context.Student;
+            if (StudentValidator.IsUsernameExists(student))
             {
                 return BadRequest(ErrorHandler.GenerateError(999, "Username already exists."));
             }
-            partners.Add(partner);
+            students.Add(student);
             _context.SaveChanges();
-            return partner;
+            return student;
         }
 
-        // POST: api/Partner/Retrieve
+        // POST: api/Student/Retrieve
         [HttpPost]
         [Route("Retrieve")]
-        public ActionResult<Student> RetrievePartner([FromBody] AuthenticationModel model)
+        public ActionResult<Student> RetrieveStudent([FromBody] AuthenticationModel model)
         {
-            var partner = _context.Student.Where(p => p.Username == model.Username && p.Password == model.Password)
+            var student = _context.Student.Where(s => s.Username == model.Username && s.Password == model.Password)
                                           .FirstOrDefault();
-            return partner;
+            return student;
         }
     }
 }
