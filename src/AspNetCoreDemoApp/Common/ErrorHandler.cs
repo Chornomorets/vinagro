@@ -14,5 +14,14 @@ namespace AspNetCoreDemoApp.Common
                 Description = description
             };
         }
+
+        public static string MessageFromException(Exception e)
+        {
+            if (e.InnerException != null)
+            {
+                return e.InnerException.Message;
+            }
+            return e.Message;
+        }
     }
 }

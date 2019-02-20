@@ -8,25 +8,24 @@ using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Web.Http;
 using AspNetCoreDemoApp.Validators;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace AspNetCoreDemoApp.Controllers
 {
-	[Route("api/Student")]
-	public class StudentController : ControllerBase
-	{
+
+    [Route("api/Student")]
+    public class StudentController : ControllerBase
+    {
         private readonly Context _context = new Context();
+
 
         // POST: api/Student/Register
         [HttpPost]
         [Route("Register")]
         public ActionResult<Student> RegisterStudent([FromBody]Student student)
         {
-            if (!AuthenticationManager.IsAuthenticated(Request))
-            {
-                return BadRequest(AuthenticationManager.UnauthorizedError());
-            }
-
             var students = _context.Student;
+
             if (StudentValidator.IsUsernameExists(student))
             {
                 return BadRequest(ErrorHandler.GenerateError(999, "Username already exists."));
@@ -41,10 +40,6 @@ namespace AspNetCoreDemoApp.Controllers
         [Route("Retrieve")]
         public ActionResult<Student> RetrieveStudent([FromBody] AuthenticationModel model)
         {
-            if (!AuthenticationManager.IsAuthenticated(Request))
-            {
-                return BadRequest(AuthenticationManager.UnauthorizedError());
-            }
 
             var student = _context.Student.Where(s => s.Username == model.Username && s.Password == model.Password)
                                           .FirstOrDefault();

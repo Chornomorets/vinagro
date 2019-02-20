@@ -6,15 +6,18 @@ using System.Threading.Tasks;
 
 namespace AspNetCoreDemoApp.Validators
 {
-    public class StudentValidator
+    public class InstituteValidator
     {
-        public static bool IsUsernameExists(Student student)
+
+        public static bool IsInstituteExists(Institute institute)
         {
-            using(var context = new Context())
+            using (var context = new Context())
             {
-                return context.Student.Where(s => s.Username == student.Username)
+                return context.Institute.Where(i => i.Name == institute.Name)
                                        .Any();
-            }           
+            }
         }
+
+
     }
 }

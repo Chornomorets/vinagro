@@ -11,9 +11,9 @@ using AspNetCoreDemoApp.Validators;
 
 namespace AspNetCoreDemoApp.Controllers
 {
-	[Route("api/Mentor")]
-	public class MentorController : ControllerBase
-	{
+    [Route("api/Mentor")]
+    public class MentorController : ControllerBase
+    {
         private readonly Context _context = new Context();
 
         // POST: api/Mentor/Register
@@ -21,10 +21,6 @@ namespace AspNetCoreDemoApp.Controllers
         [Route("Register")]
         public ActionResult<Mentor> RegisterMentor([FromBody]Mentor mentor)
         {
-            if (!AuthenticationManager.IsAuthenticated(Request))
-            {
-                return BadRequest(AuthenticationManager.UnauthorizedError());
-            }
             var mentors = _context.Mentor;
             if (MentorValidator.IsUsernameExists(mentor))
             {
@@ -40,10 +36,6 @@ namespace AspNetCoreDemoApp.Controllers
         [Route("Retrieve")]
         public ActionResult<Mentor> RetrieveMentor([FromBody] AuthenticationModel model)
         {
-            if (!AuthenticationManager.IsAuthenticated(Request))
-            {
-                return BadRequest(AuthenticationManager.UnauthorizedError());
-            }
             var mentor = _context.Mentor.Where(m => m.Username == model.Username && m.Password == model.Password)
                                           .FirstOrDefault();
             return mentor;

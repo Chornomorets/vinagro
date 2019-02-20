@@ -8,7 +8,6 @@ namespace AspNetCoreDemoApp.Validators
 {
     public class PartnerValidator
     {
-        private readonly Context _context;
         public static bool IsUsernameExists(Partner partner)
         {
             using(var context = new Context())

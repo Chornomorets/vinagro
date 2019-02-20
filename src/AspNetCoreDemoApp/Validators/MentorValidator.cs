@@ -8,7 +8,7 @@ namespace AspNetCoreDemoApp.Validators
 {
     public class MentorValidator
     {
-        private readonly Context _context;
+
         public static bool IsUsernameExists(Mentor mentor)
         {
             using(var context = new Context())
@@ -17,5 +17,6 @@ namespace AspNetCoreDemoApp.Validators
                                        .Any();
             }           
         }
+
     }
 }

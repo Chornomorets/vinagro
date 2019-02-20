@@ -11,9 +11,9 @@ using AspNetCoreDemoApp.Validators;
 
 namespace AspNetCoreDemoApp.Controllers
 {
-	[Route("api/Partner")]
-	public class PartnerController : ControllerBase
-	{
+    [Route("api/Partner")]
+    public class PartnerController : ControllerBase
+    {
         private readonly Context _context = new Context();
 
         // POST: api/Partner/Register
@@ -21,11 +21,6 @@ namespace AspNetCoreDemoApp.Controllers
         [Route("Register")]
         public ActionResult<Partner> RegisterPartner([FromBody]Partner partner)
         {
-            if (!AuthenticationManager.IsAuthenticated(Request))
-            {
-                return BadRequest(AuthenticationManager.UnauthorizedError());
-            }
-
             var partners = _context.Partner;
 
             if (PartnerValidator.IsUsernameExists(partner))
@@ -42,10 +37,6 @@ namespace AspNetCoreDemoApp.Controllers
         [Route("Retrieve")]
         public ActionResult<Partner> RetrievePartner([FromBody] AuthenticationModel model)
         {
-            if (!AuthenticationManager.IsAuthenticated(Request))
-            {
-                return BadRequest(AuthenticationManager.UnauthorizedError());
-            }
             var partner = _context.Partner.Where(p => p.Username == model.Username && p.Password == model.Password)
                                           .FirstOrDefault();
             return partner;

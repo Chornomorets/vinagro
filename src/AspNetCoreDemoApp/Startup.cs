@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Common.AspNetCoreDemoApp;
 using AspNetCoreDemoApp.Common;
+using AspNetCoreDemoApp.Controllers;
+using AspNetCoreDemoApp.Filters;
 
 namespace AspNetCoreDemoApp
 {
@@ -21,6 +23,12 @@ namespace AspNetCoreDemoApp
            
             services.AddEntityFrameworkNpgsql()
                     .AddDbContext<Context>(options => options.UseNpgsql(EnvironmentConfigManager.GetConnectionString()));
+
+            services.AddMvc(options =>
+            {
+                options.Filters.Add(typeof(UnhandledExceptionFilter));
+                options.Filters.Add(typeof(AuthenticationFilter));
+            });
 
         }
 
