@@ -30,5 +30,13 @@ namespace AspNetCoreDemoApp.Controllers
             _context.SaveChanges();
             return institute;
         }
+
+        // POST: api/Institute/All
+        [HttpGet]
+        [Route("All")]
+        public ActionResult<Institute[]> AllInstitues()
+        {
+            return _context.Institute.ToArray();
+        }
     }
 }

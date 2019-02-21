@@ -34,7 +34,7 @@ namespace AspNetCoreDemoApp.Controllers
         // POST: api/Student/Retrieve
         [HttpPost]
         [Route("Retrieve")]
-        public ActionResult<Mentor> RetrieveMentor([FromBody] AuthenticationModel model)
+        public ActionResult<Mentor> RetrieveMentor([FromBody] AuthenticationParams model)
         {
             var mentor = _context.Mentor.Where(m => m.Username == model.Username && m.Password == model.Password)
                                           .FirstOrDefault();

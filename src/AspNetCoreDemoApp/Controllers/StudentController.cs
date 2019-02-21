@@ -38,7 +38,7 @@ namespace AspNetCoreDemoApp.Controllers
         // POST: api/Student/Retrieve
         [HttpPost]
         [Route("Retrieve")]
-        public ActionResult<Student> RetrieveStudent([FromBody] AuthenticationModel model)
+        public ActionResult<Student> RetrieveStudent([FromBody] AuthenticationParams model)
         {
 
             var student = _context.Student.Where(s => s.Username == model.Username && s.Password == model.Password)

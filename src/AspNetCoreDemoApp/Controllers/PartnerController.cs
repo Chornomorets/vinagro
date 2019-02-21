@@ -8,38 +8,62 @@ using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Web.Http;
 using AspNetCoreDemoApp.Validators;
+using AspNetCoreDemoApp.Repos;
 
 namespace AspNetCoreDemoApp.Controllers
 {
     [Route("api/Partner")]
     public class PartnerController : ControllerBase
     {
-        private readonly Context _context = new Context();
+
+        private PartnerRepo _partnerRepo = new PartnerRepo();
 
         // POST: api/Partner/Register
         [HttpPost]
         [Route("Register")]
         public ActionResult<Partner> RegisterPartner([FromBody]Partner partner)
         {
-            var partners = _context.Partner;
-
             if (PartnerValidator.IsUsernameExists(partner))
             {
                 return BadRequest(ErrorHandler.GenerateError(999, "Username already exists."));
             }
-            partners.Add(partner);
-            _context.SaveChanges();
+
+            _partnerRepo.Create(partner);
+
             return partner;
         }
 
         // POST: api/Partner/Retrieve
         [HttpPost]
         [Route("Retrieve")]
-        public ActionResult<Partner> RetrievePartner([FromBody] AuthenticationModel model)
+        public ActionResult<Partner> RetrievePartner([FromBody] AuthenticationParams model)
         {
-            var partner = _context.Partner.Where(p => p.Username == model.Username && p.Password == model.Password)
-                                          .FirstOrDefault();
-            return partner;
+            
+            return _partnerRepo.Find(model);
+        }
+
+        // POST: api/Partner/RetrieveByToken
+        [HttpPost]
+        [Route("RetrieveByToken")]
+        public ActionResult<Partner> RetrieveByToken([FromBody]TokenParams token)
+        {
+            return _partnerRepo.Find(token.Token);
+        }
+
+        // POST: api/Partner/GenerateToken
+        [HttpPost]
+        [Route("GenerateToken")]
+        public ActionResult<string> GenerateToken([FromBody]AuthenticationParams model)
+        {
+            return _partnerRepo.SetToken(model);
+        }
+
+        // POST: api/Partner/GetToken
+        [HttpPost]
+        [Route("GetToken")]
+        public ActionResult<string> GetToken([FromBody]AuthenticationParams model)
+        {
+            return _partnerRepo.GetToken(model);
         }
     }
 }

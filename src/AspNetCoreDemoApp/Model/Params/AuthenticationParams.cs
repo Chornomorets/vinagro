@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AspNetCoreDemoApp.Model
 {
-    public class AuthenticationModel
+    public class AuthenticationParams
     {
         [Required, MaxLength(50)]
         public string Username { get; set; }
