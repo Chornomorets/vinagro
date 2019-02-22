@@ -42,10 +42,7 @@ namespace AspNetCoreDemoApp.Controllers
         {
             var student = _context.Student.Where(s => s.Username == model.Username && s.Password == model.Password)
                                           .FirstOrDefault();
-            if(student == null)
-                return BadRequest(ErrorHandler.GenerateError(1011, "Student with these parameters doesn't exist."));
-            else
-                return student;
+            return student;
         }
     }
 }

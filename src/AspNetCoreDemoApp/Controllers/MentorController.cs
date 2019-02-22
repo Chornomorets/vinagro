@@ -38,10 +38,7 @@ namespace AspNetCoreDemoApp.Controllers
         {
             var mentor = _context.Mentor.Where(m => m.Username == model.Username && m.Password == model.Password)
                                           .FirstOrDefault();
-            if(mentor == null)
-                return BadRequest(ErrorHandler.GenerateError(1100, "Mentor with these parameters doesn't exist."));
-            else
-                return mentor;
+            return mentor;
         }
     }
 }

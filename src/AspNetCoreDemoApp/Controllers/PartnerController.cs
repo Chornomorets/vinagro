@@ -38,10 +38,7 @@ namespace AspNetCoreDemoApp.Controllers
         [Route("Retrieve")]
         public ActionResult<Partner> RetrievePartner([FromBody] AuthenticationParams model)
         {
-            if(_partnerRepo.Find(model) == null)
-                return BadRequest(ErrorHandler.GenerateError(1010, "Partner with these parameters doesn't exist."));
-            else
-                return _partnerRepo.Find(model);
+            return _partnerRepo.Find(model);
         }
 
         // POST: api/Partner/RetrieveByToken
