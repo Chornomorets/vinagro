@@ -9,6 +9,7 @@ using System.Linq;
 using System.Web.Http;
 using AspNetCoreDemoApp.Validators;
 using AspNetCoreDemoApp.Repos;
+using AspNetCoreDemoApp.Model.Params;
 
 namespace AspNetCoreDemoApp.Controllers
 {
@@ -17,6 +18,8 @@ namespace AspNetCoreDemoApp.Controllers
     {
         private MentorRepo _mentorRepo = new MentorRepo();
 
+        private MentorRequestRepo _mentorRequestRepo = new MentorRequestRepo();
+
         // POST: api/Mentor/Register
         [HttpPost]
         [Route("Register")]
@@ -24,7 +27,7 @@ namespace AspNetCoreDemoApp.Controllers
         {
             if (MentorValidator.IsUsernameExists(mentor))
             {
-                return BadRequest(ErrorHandler.GenerateError(999, "Username already exists."));
+                return BadRequest(ErrorHandler.GenerateError(ErrorHandler.UsernameExists));
             }
 
             _mentorRepo.Create(mentor);
@@ -63,5 +66,30 @@ namespace AspNetCoreDemoApp.Controllers
         {
             return _mentorRepo.GetToken(model);
         }
+
+        // POST: api/Mentor/CreateRequest
+        [HttpPost]
+        [Route("CreateRequest")]
+        public ActionResult<MentorRequest> CreateRequest([FromBody]MentorRequestParams requestParams)
+        {
+
+            if (!MentorValidator.IsMentorExists(requestParams.MentorID))
+            {
+                return BadRequest(ErrorHandler.GenerateError(ErrorHandler.MentorNotFound));
+            }
+
+            if (!ProjectValidator.IsProjectExists(requestParams.ProjectID))
+            {
+                return BadRequest(ErrorHandler.GenerateError(ErrorHandler.ProjectNotFound));
+            }
+
+            if (MentorRequestValidator.IsExistsRequest(requestParams))
+            {
+                return BadRequest(ErrorHandler.GenerateError(ErrorHandler.MentorRequestExists));
+            }
+
+            return _mentorRequestRepo.CreateRequest(requestParams);
+        }
+
     }
 }

@@ -1,5 +1,6 @@
 using AspNetCoreDemoApp.Common;
 using AspNetCoreDemoApp.Model;
+using AspNetCoreDemoApp.Model.Params;
 using AspNetCoreDemoApp.Validators;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,6 +13,7 @@ namespace AspNetCoreDemoApp.Repos
     public class MentorRepo
     {
         private readonly Context _context = new Context();
+
         public Mentor Find(AuthenticationParams model)
         {
             var mentor = _context.Mentor.Where(m => m.Username == model.Username && m.Password == model.Password)
@@ -51,5 +53,6 @@ namespace AspNetCoreDemoApp.Repos
         {
             return Find(model).Token;
         }
+
     }
 }

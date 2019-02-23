@@ -9,6 +9,7 @@ using System.Linq;
 using System.Web.Http;
 using AspNetCoreDemoApp.Validators;
 using AspNetCoreDemoApp.Repos;
+using AspNetCoreDemoApp.Model.Params;
 
 namespace AspNetCoreDemoApp.Controllers
 {
@@ -17,6 +18,8 @@ namespace AspNetCoreDemoApp.Controllers
     {
 
         private PartnerRepo _partnerRepo = new PartnerRepo();
+
+        private MentorRequestRepo _mentorRequestRepo = new MentorRequestRepo();
 
         // POST: api/Partner/Register
         [HttpPost]
@@ -63,6 +66,31 @@ namespace AspNetCoreDemoApp.Controllers
         public ActionResult<string> GetToken([FromBody]AuthenticationParams model)
         {
             return _partnerRepo.GetToken(model);
+        }
+
+        // POST: api/Partner/AcceptMentor
+        [HttpPost]
+        [Route("AcceptMentor")]
+        public ActionResult<MentorRequest> AcceptMentor([FromBody]MentorRequestParams requestParams)
+        {
+            if (!MentorRequestValidator.IsExistsRequest(requestParams))
+            {
+                return BadRequest(ErrorHandler.GenerateError(ErrorHandler.MentorRequestDoesNotExists));
+            }
+
+            return _mentorRequestRepo.AcceptRequest(requestParams);
+        }
+        // POST: api/Partner/DenyMentor
+        [HttpPost]
+        [Route("DenyMentor")]
+        public ActionResult<MentorRequest> DenyMentor([FromBody]MentorRequestParams requestParams)
+        {
+            if (!MentorRequestValidator.IsExistsRequest(requestParams))
+            {
+                return BadRequest(ErrorHandler.GenerateError(ErrorHandler.MentorRequestDoesNotExists));
+            }
+
+            return _mentorRequestRepo.DenyRequest(requestParams);
         }
     }
 }

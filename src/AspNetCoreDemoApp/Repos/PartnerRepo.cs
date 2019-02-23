@@ -1,5 +1,6 @@
 using AspNetCoreDemoApp.Common;
 using AspNetCoreDemoApp.Model;
+using AspNetCoreDemoApp.Model.Params;
 using AspNetCoreDemoApp.Validators;
 using Microsoft.AspNetCore.Mvc;
 using System;

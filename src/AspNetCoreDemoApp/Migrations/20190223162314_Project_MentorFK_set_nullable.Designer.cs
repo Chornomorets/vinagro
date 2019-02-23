@@ -3,15 +3,17 @@ using System;
 using AspNetCoreDemoApp.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace AspNetCoreDemoApp.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20190223162314_Project_MentorFK_set_nullable")]
+    partial class Project_MentorFK_set_nullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,7 +27,6 @@ namespace AspNetCoreDemoApp.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasMaxLength(50);
 
                     b.HasKey("ID");
@@ -152,7 +153,7 @@ namespace AspNetCoreDemoApp.Migrations
                     b.Property<string>("Description")
                         .IsRequired();
 
-                    b.Property<int?>("Duration");
+                    b.Property<int>("Duration");
 
                     b.Property<long?>("FK_Mentor");
 

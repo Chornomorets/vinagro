@@ -13,7 +13,7 @@ namespace AspNetCoreDemoApp.Model
         public long ID { get; set; }
 
         [ForeignKey("Mentor")]
-        public long FK_Mentor { get; set; }
+        public long? FK_Mentor { get; set; }
         public Mentor Mentor { get; set; }
 
         [Required, ForeignKey("Partner")]
@@ -29,6 +29,6 @@ namespace AspNetCoreDemoApp.Model
         [Required, MaxLength(50)]
         public string ProjectCategory { get; set; }
 
-        public int Duration { get; set; }
+        public int? Duration { get; set; }
     }
 }

@@ -10,6 +10,7 @@ using System.Web.Http;
 using AspNetCoreDemoApp.Validators;
 using Microsoft.AspNetCore.Mvc.Filters;
 using AspNetCoreDemoApp.Repos;
+using AspNetCoreDemoApp.Model.Params;
 
 namespace AspNetCoreDemoApp.Controllers
 {

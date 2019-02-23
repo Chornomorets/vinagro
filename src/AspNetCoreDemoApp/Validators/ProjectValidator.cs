@@ -8,6 +8,8 @@ namespace AspNetCoreDemoApp.Validators
 {
     public class ProjectValidator
     {
+        private static Context _context = new Context();
+
         public static bool IsProjectNameExists(Project project)
         {
             using (var context = new Context())
@@ -15,6 +17,11 @@ namespace AspNetCoreDemoApp.Validators
                 return context.Project.Where(p => p.Name == project.Name)
                                        .Any();
             }
+        }
+
+        public static bool IsProjectExists(long id)
+        {
+            return _context.Project.Find(id) != null;
         }
     }
 }

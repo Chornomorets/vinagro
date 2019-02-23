@@ -12,7 +12,7 @@ namespace AspNetCoreDemoApp.Model
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long ID { get; set; }
 
-        [MaxLength(50)]
+        [Required, MaxLength(50)]
         public string Name { get; set; }
     }
 }

@@ -5,8 +5,12 @@ using System.Threading.Tasks;
 
 namespace AspNetCoreDemoApp.Model.Params
 {
-    public class TokenParams
+    public class MentorRequestParams
     {
-        public string Token { get; set; }
+
+        public long MentorID { get; set; }
+
+        public long ProjectID { get; set; }
+
     }
 }

@@ -3,15 +3,17 @@ using System;
 using AspNetCoreDemoApp.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace AspNetCoreDemoApp.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20190223162841_Institute_set_Name_required")]
+    partial class Institute_set_Name_required
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -152,7 +154,7 @@ namespace AspNetCoreDemoApp.Migrations
                     b.Property<string>("Description")
                         .IsRequired();
 
-                    b.Property<int?>("Duration");
+                    b.Property<int>("Duration");
 
                     b.Property<long?>("FK_Mentor");
 

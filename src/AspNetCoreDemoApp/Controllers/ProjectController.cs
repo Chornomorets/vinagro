@@ -23,7 +23,7 @@ namespace AspNetCoreDemoApp.Controllers
 
             if (ProjectValidator.IsProjectNameExists(project))
             {
-                return BadRequest(ErrorHandler.GenerateError(1201, "Project name already exists."));
+                return BadRequest(ErrorHandler.GenerateError(ErrorHandler.ProjectNameEsists));
             }
 
             projects.Add(project);

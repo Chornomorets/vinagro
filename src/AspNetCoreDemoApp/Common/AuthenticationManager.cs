@@ -8,12 +8,6 @@ namespace AspNetCoreDemoApp.Common
 {
     public class AuthenticationManager
     {
-        #region constants
-
-        private static readonly int     ERROR_CODE_UNAUTHORIZED = 401;
-        private static readonly string ERROR_DESCRIPTION_UNAUTHORIZED = "Invalid authentication credentials.";
-
-        #endregion
 
         private static string _authentication;
 
@@ -26,7 +20,7 @@ namespace AspNetCoreDemoApp.Common
 
         public static object UnauthorizedError()
         {
-            return ErrorHandler.GenerateError(ERROR_CODE_UNAUTHORIZED, ERROR_DESCRIPTION_UNAUTHORIZED);
+            return ErrorHandler.GenerateError(ErrorHandler.Unauthorized, ErrorHandler.Description(ErrorHandler.Unauthorized));
         }
     }
 }

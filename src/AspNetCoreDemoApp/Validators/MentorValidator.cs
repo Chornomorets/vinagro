@@ -8,15 +8,17 @@ namespace AspNetCoreDemoApp.Validators
 {
     public class MentorValidator
     {
+        private static Context _context = new Context();
 
         public static bool IsUsernameExists(Mentor mentor)
         {
-            using(var context = new Context())
-            {
-                return context.Mentor.Where(m => m.Username == mentor.Username)
-                                       .Any();
-            }           
+                return _context.Mentor.Where(m => m.Username == mentor.Username)
+                                      .Any();
         }
 
+        internal static bool IsMentorExists(long id)
+        {
+            return _context.Mentor.Find(id) != null;
+        }
     }
 }
