@@ -19,6 +19,8 @@ namespace AspNetCoreDemoApp.Controllers
 
         private PartnerRepo _partnerRepo = new PartnerRepo();
 
+        private ProjectRepo _projectRepo = new ProjectRepo();
+
         private MentorRequestRepo _mentorRequestRepo = new MentorRequestRepo();
 
         // POST: api/Partner/Register
@@ -78,7 +80,8 @@ namespace AspNetCoreDemoApp.Controllers
                 return BadRequest(ErrorHandler.GenerateError(ErrorHandler.MentorRequestDoesNotExists));
             }
 
-            return _mentorRequestRepo.AcceptRequest(requestParams);
+            _projectRepo.AddMentorOnProject(requestParams);
+            return _mentorRequestRepo.ChangeState(requestParams, RequestState.Accepted);
         }
         // POST: api/Partner/DenyMentor
         [HttpPost]
@@ -90,7 +93,7 @@ namespace AspNetCoreDemoApp.Controllers
                 return BadRequest(ErrorHandler.GenerateError(ErrorHandler.MentorRequestDoesNotExists));
             }
 
-            return _mentorRequestRepo.DenyRequest(requestParams);
+            return _mentorRequestRepo.ChangeState(requestParams, RequestState.Denied);
         }
     }
 }

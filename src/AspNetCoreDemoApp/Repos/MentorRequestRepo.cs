@@ -7,14 +7,15 @@ using System.Threading.Tasks;
 
 namespace AspNetCoreDemoApp.Repos
 {
+    public class RequestState
+    {
+        public const int Created = 1;
+        public const int Accepted = 2;
+        public const int Denied = 0;
+    }
+
     public class MentorRequestRepo
     {
-        private class RequestState
-        {
-            public const int Created = 1;
-            public const int Accepted = 2;
-            public const int Denied = 0;
-        }
 
         private readonly Context _context = new Context();
 
@@ -34,11 +35,11 @@ namespace AspNetCoreDemoApp.Repos
             return mentorRequest;
         }
 
-        public MentorRequest AcceptRequest(MentorRequestParams requestParams)
+        public MentorRequest ChangeState(MentorRequestParams requestParams, int requestState)
         {
             var mr = Find(requestParams);
 
-            mr.State = RequestState.Accepted;
+            mr.State = requestState;
 
             _context.SaveChanges();
 
@@ -51,17 +52,6 @@ namespace AspNetCoreDemoApp.Repos
             return _context.MentorRequest
                              .Where(r => r.FK_Project == requestParams.ProjectID && r.FK_Mentor == requestParams.MentorID)
                              .FirstOrDefault();
-        }
-
-        public MentorRequest DenyRequest(MentorRequestParams requestParams)
-        {
-            var mr = Find(requestParams);
-
-            mr.State = RequestState.Denied;
-
-            _context.SaveChanges();
-
-            return mr;
         }
     }
 }
